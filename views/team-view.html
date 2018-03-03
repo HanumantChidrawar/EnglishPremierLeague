@@ -1,0 +1,280 @@
+<!-- Start of team view -->
+<section>
+
+	 <!--first row for displaying Team logo & journey table  -->
+	<div class="row">
+
+		<!-- division displaying Team name & logo -->
+		<div class="col-md-4">
+			<div class="card">
+			<div class="card-header"><img ng-src="{{teamStats.url}}" class="img-rounded"></img></div>
+			<div class="card-body"><h2 style="text-align: center">{{teamStats.teamName}}</h2></div>
+			</div>
+		</div>
+
+		<!-- Dision displaying team's journey in both the seasons -->
+		<div class="col-md-8">
+			<div class="card">
+			<div class="card-header" style="background-color:rgb(238, 240, 100)"><h2>Team's Journey</h2></div>
+			<div class="card-body table-responsive">
+
+				<table class="table table-hover">
+	    		<thead>
+	      		<tr>
+	        		<th></th>
+	        		<th>EPL 2016/17</th>
+	        		<th>EPL 2015/16</th>
+							<th>Total</th>
+	      		</tr>
+	    		</thead>
+	    		<tbody>
+	      		<tr>
+	        		<td>Mathes Won</td>
+	        		<td>{{teamStats.teamStatistics.won16}}</td>
+	        		<td>{{teamStats.teamStatistics.won15}}</td>
+							<td>{{teamStats.teamStatistics.won16 + teamStats.teamStatistics.won15}}</td>
+	      		</tr>
+	      		<tr>
+							<td>Mathes Lost</td>
+	        		<td>{{teamStats.teamStatistics.lost16}}</td>
+	        		<td>{{teamStats.teamStatistics.lost15}}</td>
+							<td>{{teamStats.teamStatistics.lost16 + teamStats.teamStatistics.lost15}}</td>
+	      		</tr>
+	      		<tr>
+							<td>Mathes tied</td>
+	        		<td>{{teamStats.teamStatistics.tied16}}</td>
+	        		<td>{{teamStats.teamStatistics.tied15}}</td>
+							<td>{{teamStats.teamStatistics.tied16 + teamStats.teamStatistics.tied15}}</td>
+	      		</tr>
+						<tr>
+							<td>Goals Scored</td>
+	        		<td>{{teamStats.stats.count.goals16}}</td>
+	        		<td>{{teamStats.stats.count.goals15}}</td>
+							<td>{{teamStats.stats.count.goals16 + teamStats.stats.count.goals15}}</td>
+	      		</tr>
+	    		</tbody>
+  			</table>
+
+			</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- end of first row -->
+
+<!-- second row for displaying mathces played in both the seaons by team -->
+	<div class="row" style="margin-top:4%">
+
+		<!-- first column displaying the matches played in 2016/17 season -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="card">
+			  <div class="card-header" style="background-color:rgb(238, 240, 100)"><h4 >Mathces Played in EPL 2016/17 Season</h4></div>
+
+				<!-- use of accordion for best effect-->
+			  <div class="card-body" id="accordion">
+					<div class="card" ng-if="teamStats.stats.wonMatches16.length">
+						<div class="card-header bg-success" id="headingOne">
+      				<h5 class="mb-0">
+        			<button class="btn btn-success btn-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          			Matches WON in EPL 2016
+        			</button>
+      				</h5>
+    				</div>
+
+						<!-- Division displaying Matches Won -->
+						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<div ng-repeat="match in teamStats.stats.wonMatches16">
+								<div class="card">
+									<div class="row">
+										<div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+											<a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+												<p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					<!-- Second item in Accordion -->
+					<div class="card" ng-if="teamStats.stats.lostMatches16.length">
+						<div class="card-header bg-danger" id="headingTwo">
+      				<h5 class="mb-0">
+        			<button class="btn btn-danger btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
+          			Matches LOST in EPL 2016
+        			</button>
+      				</h5>
+    				</div>
+
+						<!-- Division displaying Matches Lost -->
+						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+						<div class="card-body">
+							<div ng-repeat="match in teamStats.stats.lostMatches16">
+								<div class="card">
+									<div class="row">
+										<div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+											<a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+												<p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					<!-- Third Item in Acoordion -->
+					<div class="card" ng-if="teamStats.stats.tiedMatches16.length">
+						<div class="card-header bg-warning" id="headingThree">
+      				<h5 class="mb-0">
+        			<button class="btn btn-warning btn-block collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne">
+          			Matches TIED in EPL 2016
+        			</button>
+      				</h5>
+    				</div>
+
+						<!-- Division displaying Matches Drawn -->
+						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+						<div class="card-body">
+							<div ng-repeat="match in teamStats.stats.tiedMatches16">
+								<div class="card">
+									<div class="row">
+										<div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+											<a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+												<p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- End of Accordion -->
+				<!-- Division Summarizing the Matches count in Season -->
+			  <div class="card-footer">
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-success">WON: {{teamStats.teamStatistics.won16}}</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-danger">LOST: {{teamStats.teamStatistics.lost16}}</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-warning">TIED: {{teamStats.teamStatistics.tied16}}</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- first column displaying the matches played in 2015/16 season -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+			<div class="card">
+			  <div class="card-header" style="background-color:rgb(238, 240, 100)"><h4>Mathces Played in EPL 2015/16 Season</h4></div>
+
+				<!-- use of accordion for best effect-->
+				<div class="card-body" id="accordion1">
+			    <div class="card" ng-if="teamStats.stats.wonMatches15.length">
+			      <div class="card-header bg-success" id="headingOne1">
+			        <h5 class="mb-0">
+			        <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+			          Matches WON in EPL 2015
+			        </button>
+			        </h5>
+			      </div>
+
+			      <div id="collapseOne1" class="collapse" aria-labelledby="headingOne1" data-parent="#accordion1">
+
+						<!-- Division displaying Matches Won -->
+						<div class="card-body">
+			        <div ng-repeat="match in teamStats.stats.wonMatches15">
+			          <div class="card">
+			            <div class="row">
+			              <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			                <a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+			                  <p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+			                </a>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      </div>
+			    </div>
+
+					<!-- Second Item in Accordion -->
+			    <div class="card" ng-if="teamStats.stats.lostMatches15.length">
+			      <div class="card-header bg-danger" id="headingTwo1">
+			        <h5 class="mb-0">
+			        <button class="btn btn-danger btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+			          Matches LOST in EPL 2015
+			        </button>
+			        </h5>
+			      </div>
+
+			      <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion1">
+						<!-- Division displaying Matches lost -->
+						<div class="card-body">
+			        <div ng-repeat="match in teamStats.stats.lostMatches15">
+			          <div class="card">
+			            <div class="row">
+			              <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			                <a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+			                  <p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+			                </a>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      </div>
+			    </div>
+
+					<!-- Division displaying third item in Accordion -->
+			    <div class="card" ng-if="teamStats.stats.tiedMatches15.length">
+			      <div class="card-header bg-warning" id="headingThree1">
+			        <h5 class="mb-0">
+			        <button class="btn btn-warning btn-block collapsed" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
+			          Matches TIED in EPL 2015
+			        </button>
+			        </h5>
+			      </div>
+
+			      <div id="collapseThree1" class="collapse" aria-labelledby="headingThree1" data-parent="#accordion1">
+						<!-- Division displaying Matches Won -->
+						<div class="card-body">
+			        <div ng-repeat="match in teamStats.stats.tiedMatches15">
+			          <div class="card">
+			            <div class="row">
+			              <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			                <a ng-href="#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}">
+			                  <p style="text-align: center; color: black">{{match.team1.code}} vs {{match.team2.code}}</p>
+			                </a>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      </div>
+			    </div>
+
+			  </div>
+				<!-- End of Accordion -->
+				<!-- Division Summarizing the Matches count in Season -->
+			  <div class="card-footer">
+			    <div class="row">
+			      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-success">WON: {{teamStats.teamStatistics.won15}}</div>
+			      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-danger">LOST: {{teamStats.teamStatistics.lost15}}</div>
+			      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-warning">TIED: {{teamStats.teamStatistics.tied15}}</div>
+			    </div>
+			  </div>
+
+			</div>
+		</div>
+
+
+	</div>
+</section>

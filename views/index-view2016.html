@@ -1,0 +1,42 @@
+<!-- EPL2106/17 season view -->
+<section class="container">
+
+<!--Decalaring Filters  -->
+  <div class="row">
+    <form class="form-inline">
+      <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <input type="text" class="form-control" ng-model ="teamName" placeholder="Search by Team Name"/>
+      </div>
+      <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <input type="text" class="form-control" ng-model ="year" placeholder="Search by Year"/>
+      </div>
+      <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <input type="text" class="form-control" ng-model ="roundName1" placeholder="Search by roundName"/>
+      </div>
+      <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <input type="text" class="form-control" ng-model ="teamCode" placeholder="Search by TeamCode"/>
+      </div>
+    </form>
+  </div>
+
+<!-- Displaying Mathces of Season 2016/17 uing bootstrap cards -->
+  <div>
+    <h2 style="margin-top: 5%; margin-bottom: 5%">{{myEPL.Data2016.name}}</h2>
+    <div class=" card"  ng-repeat="round in myEPL.Data2016.rounds | filter: roundName1 " >
+
+        <h5 class="card-title" style="margin-top: 5%; margin-bottom: 5%; text-align: center"> {{round.name}}</h5>
+        <div class=" row card-body">
+          <div class="card col-xs-12 col-sm-6 col-md-4 col-lg-4"  ng-repeat="match in round.matches | filter: teamCode | filter: year | filter: teamName">
+            <div class="card-body">
+              <p class="card-text">{{match.team1.code}} vs {{match.team2.code}}</p>
+              <p class="card-text">{{match.date| date: "fullDate"}}</p>
+              <a href="#" ng-href='#/match-view/{{ match.date}}/{{ match.team1.code }}/{{ match.team2.code }}' class="card-link">Match Deatils</a>
+            </div>
+          </div>
+
+      </div>
+    </div>
+</div>
+
+</section>
+<!-- End of EPL2016/17 season view -->
